@@ -14,6 +14,4 @@ public class LoginTest extends TestBase{
                 .typePassword("secret")
                 .enterSubmitBtn();
     }
-
-
 }
