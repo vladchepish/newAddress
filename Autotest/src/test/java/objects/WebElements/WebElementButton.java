@@ -2,17 +2,15 @@ package objects.WebElements;
 
 import org.openqa.selenium.WebElement;
 
-public class WebElementInput{
+public class WebElementButton {
 
     private WebElement element;
 
-    public WebElementInput(WebElement element){
+    public WebElementButton(WebElement element){
         this.element = element;
     }
 
-    public void typeText(String value){
+    public void click(){
         element.click();
-        element.clear();
-        element.sendKeys(value);
     }
 }
