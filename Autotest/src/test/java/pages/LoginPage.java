@@ -1,18 +1,13 @@
 package pages;
 
-import objects.WebElements.WebElementButton;
-import objects.WebElements.WebElementInput;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class LoginPage extends BasePage{
 
-    protected WebElementInput loginInput =
-            new WebElementInput(getElement(By.cssSelector("input[name='user']")));
-    protected WebElementInput passwordInput =
-            new WebElementInput(getElement(By.cssSelector("input[name='pass']")));
-    protected WebElementButton submitBtn =
-            new WebElementButton(getElement(By.cssSelector("input[value='Login']")));
+    protected static final By LOGIN_INPUP = By.cssSelector("input[name='user']");
+    protected static final By PASSWORD_INPUT = By.cssSelector("input[name='pass']");
+    protected static final By SUBMIN_BTN = By.cssSelector("input[value='Login']");
 
     public LoginPage(WebDriver driver) {
         super(driver);
@@ -20,17 +15,17 @@ public class LoginPage extends BasePage{
     }
 
     public LoginPage typeLogin(String value){
-        loginInput.typeText(value);
+        findAndFeelField(LOGIN_INPUP, value);
         return this;
     }
 
     public LoginPage typePassword(String value){
-        passwordInput.typeText(value);
+        findAndFeelField(PASSWORD_INPUT, value);
         return this;
     }
 
     public LoginPage enterSubmitBtn(){
-        submitBtn.click();
+        clickByElement(SUBMIN_BTN);
         return this;
     }
 }
