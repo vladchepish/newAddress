@@ -17,6 +17,8 @@ public class BasePage {
     protected WebDriverWait betWait;
     protected WebDriverWait defaultWait;
 
+    protected static final By GROUPS_UPPER_MENU_LINK = By.cssSelector("a[href*='group']");
+
     public BasePage(WebDriver driver) {
         this.driver = driver;
         this.shortWait = new WebDriverWait(driver, TimeOut.shortTimeout);
