@@ -1,6 +1,6 @@
 package pages;
 
-import objects.GroupDate;
+import objects.Group;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -37,7 +37,7 @@ public class AddGroupPage extends BasePage {
         return new SuccessCreationGroupPage(driver);
     }
 
-    public AddGroupPage fillGroupCreationFields(GroupDate group){
+    public AddGroupPage fillGroupCreationFields(Group group){
         setGroupName(group.getGroupName());
         setGroupHeader(group.getGroupHeader());
         setGroupFooter(group.getGroupFooter());

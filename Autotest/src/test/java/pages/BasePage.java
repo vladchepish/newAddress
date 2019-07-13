@@ -17,7 +17,9 @@ public class BasePage {
     protected WebDriverWait betWait;
     protected WebDriverWait defaultWait;
 
-    protected static final By GROUPS_UPPER_MENU_LINK = By.cssSelector("a[href*='group']");
+    protected static final By GROUPS_UPPER_MENU_LINK = By.cssSelector("div#nav a[href*='group']");
+    protected static final By ADD_CONTACT_UPPER_MENU_LINK = By.cssSelector("div#nav a[href*='edit']");
+    protected static final By HOME_PAGE_UPPER_MENU_LINK = By.cssSelector("div#nav a[href='./']");
 
     public BasePage(WebDriver driver) {
         this.driver = driver;

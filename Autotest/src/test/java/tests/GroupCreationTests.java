@@ -1,6 +1,6 @@
 package tests;
 
-import objects.GroupDate;
+import objects.Group;
 import org.testng.annotations.Test;
 import pages.AddGroupPage;
 import pages.GroupsPage;
@@ -21,11 +21,11 @@ public class GroupCreationTests extends TestBase {
     public void testContactCreation(){
         loginPage = navigation.openLoginPage();
         mainPage = loginPage.login("admin", "secret");
-        groupsPage = mainPage.openGroupsPage();
+        groupsPage = navigation.openGroupsPage();
         int groupNumberBefore = groupsPage.countGroups();
         addGroupPage = groupsPage.pressAddNewGroupBtn()
                 .fillGroupCreationFields(
-                        new GroupDate().setGroupName(generateString(7))
+                        new Group().setGroupName(generateString(7))
                                 .setGroupHeader(generateString(6))
                                 .setGroupFooter(generateString(5)));
         groupsPage = addGroupPage.pressEnterInformationBtn()

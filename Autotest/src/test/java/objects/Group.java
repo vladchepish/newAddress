@@ -1,6 +1,6 @@
 package objects;
 
-public class GroupDate {
+public class Group {
 
     private String groupName;
     private String groupHeader;
@@ -10,7 +10,7 @@ public class GroupDate {
         return groupName;
     }
 
-    public GroupDate setGroupName(String groupName) {
+    public Group setGroupName(String groupName) {
         this.groupName = groupName;
         return this;
     }
@@ -19,7 +19,7 @@ public class GroupDate {
         return groupHeader;
     }
 
-    public GroupDate setGroupHeader(String groupHeader) {
+    public Group setGroupHeader(String groupHeader) {
         this.groupHeader = groupHeader;
         return this;
     }
@@ -28,7 +28,7 @@ public class GroupDate {
         return groupFooter;
     }
 
-    public GroupDate setGroupFooter(String groupFooter) {
+    public Group setGroupFooter(String groupFooter) {
         this.groupFooter = groupFooter;
         return this;
     }

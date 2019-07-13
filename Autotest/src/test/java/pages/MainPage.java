@@ -12,11 +12,12 @@ public class MainPage extends BasePage {
 
     private static final By LOGOUT_BTN = By.cssSelector("a[onclick=\"document.logout.submit();\"]");
     private static final By UPPER_MENU_LIST_ITEM_LINK = By.cssSelector("div#nav a");
-
+    private static final By SEARCH_STRING_INPUT = By.cssSelector("input[name='searchstring']");
+    private static final By CONTACT_LINE_IN_TABLE = By.cssSelector("tr[name='entry']");
 
     public MainPage(WebDriver driver) {
         super(driver);
-        shortWait.until(ExpectedConditions.visibilityOfElementLocated(LOGOUT_BTN));
+        shortWait.until(ExpectedConditions.visibilityOfElementLocated(SEARCH_STRING_INPUT));
     }
 
     public List<String> getUpperMenuItemsList() {
@@ -28,8 +29,7 @@ public class MainPage extends BasePage {
         return linksNamesList;
     }
 
-    public GroupsPage openGroupsPage(){
-        clickByElement(GROUPS_UPPER_MENU_LINK);
-        return new GroupsPage(driver);
+    public int countContacts(){
+        return getElements(CONTACT_LINE_IN_TABLE).size();
     }
 }
