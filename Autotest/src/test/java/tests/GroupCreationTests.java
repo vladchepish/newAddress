@@ -7,7 +7,7 @@ import pages.GroupsPage;
 import pages.LoginPage;
 import pages.MainPage;
 
-import static Utils.DataGenerator.*;
+import static Utils.CustomObjectsGenerator.generateRandomGroup;
 import static lib.Compares.CompareTwoIntValue;
 
 public class GroupCreationTests extends TestBase {
@@ -23,11 +23,9 @@ public class GroupCreationTests extends TestBase {
         mainPage = loginPage.login("admin", "secret");
         groupsPage = navigation.openGroupsPage();
         int groupNumberBefore = groupsPage.countGroups();
+        Group roup = generateRandomGroup();
         addGroupPage = groupsPage.pressAddNewGroupBtn()
-                .fillGroupCreationFields(
-                        new Group().setGroupName(generateString(7))
-                                .setGroupHeader(generateString(6))
-                                .setGroupFooter(generateString(5)));
+                .fillGroupCreationFields(roup);
         groupsPage = addGroupPage.pressEnterInformationBtn()
                 .clickOnReturnLink();
         int groupNumberAfter = groupsPage.countGroups();

@@ -76,14 +76,4 @@ public class Contact {
         return this;
     }
 
-    public Contact generateRandomContact(){
-        return new Contact()
-                .setFirstName(generateString(6))
-                .setMiddleName(generateString(7))
-                .setLastName(generateString(8))
-                .setNickName(generateString(3))
-                .setAddress(generateString(15))
-                .setMobilePhone("+7" + geniratorNumeric(10))
-                .setHomePhone("+8652" + geniratorNumeric(7));
-    }
 }
