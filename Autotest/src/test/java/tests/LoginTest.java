@@ -10,8 +10,8 @@ public class LoginTest extends TestBase{
     @Test
     public void loginTest(){
         loginPage = navigation.openLoginPage();
-        loginPage.typeLogin("admin")
-                .typePassword("secret")
-                .enterSubmitBtn();
+        loginPage.typeLogin("admin");
+        loginPage.typePassword("secret");
+        loginPage.enterSubmitBtn();
     }
 }
