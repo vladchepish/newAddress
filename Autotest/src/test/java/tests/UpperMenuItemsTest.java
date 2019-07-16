@@ -6,13 +6,10 @@ import org.testng.asserts.SoftAssert;
 import pages.LoginPage;
 import pages.MainPage;
 
-import java.util.Arrays;
 import java.util.List;
 
-import static lib.Compares.CompareFrstArgBiigerThenSecond;
 import static lib.Compares.CompareTwoIntValue;
 import static lib.Constants.ETALON_UPPER_MENU_ITEMS;
-import static org.testng.Assert.assertEquals;
 
 public class UpperMenuItemsTest extends TestBase {
 
