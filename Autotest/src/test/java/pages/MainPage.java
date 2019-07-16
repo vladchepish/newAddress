@@ -14,6 +14,8 @@ public class MainPage extends BasePage {
     private static final By UPPER_MENU_LIST_ITEM_LINK = By.cssSelector("div#nav a");
     private static final By SEARCH_STRING_INPUT = By.cssSelector("input[name='searchstring']");
     private static final By CONTACT_LINE_IN_TABLE = By.cssSelector("tr[name='entry']");
+    private static final By CONTACT_CHECKBOX_INPUT = By.cssSelector("table#maintable input[type='checkbox']");
+    private static final By DELETE_BUTTON = By.cssSelector("input[value='Delete']");
 
     public MainPage(WebDriver driver) {
         super(driver);
@@ -31,5 +33,18 @@ public class MainPage extends BasePage {
 
     public int countContacts(){
         return getElements(CONTACT_LINE_IN_TABLE).size();
+    }
+
+    public MainPage selectFirstContact() {
+        clickByElement(CONTACT_CHECKBOX_INPUT);
+        return this;
+    }
+
+    public void pressDeleteBtn() {
+        clickByElement(DELETE_BUTTON);
+    }
+
+    public void confirmDeletion() {
+        driver.switchTo().alert().accept();
     }
 }
