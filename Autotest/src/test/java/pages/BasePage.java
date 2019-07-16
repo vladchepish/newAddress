@@ -20,6 +20,7 @@ public class BasePage {
     protected static final By GROUPS_UPPER_MENU_LINK = By.cssSelector("div#nav a[href*='group']");
     protected static final By ADD_CONTACT_UPPER_MENU_LINK = By.cssSelector("div#nav a[href*='edit']");
     protected static final By HOME_PAGE_UPPER_MENU_LINK = By.cssSelector("div#nav a[href='./']");
+    protected static final By MESSAGE_BOX = By.cssSelector("div.msgbox");
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
@@ -70,4 +71,7 @@ public class BasePage {
         getElement(by).click();
     }
 
+    public String getTextFromMEssageBox(){
+        return getElement(MESSAGE_BOX).getText();
+    }
 }

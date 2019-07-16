@@ -11,6 +11,7 @@ import pages.Navigation;
 
 public class TestBase {
 
+    protected BasePage basePage;
     protected WebDriver driver;
     protected WebDriverWait wait;
     protected Navigation navigation;
@@ -20,7 +21,7 @@ public class TestBase {
         driver = new ChromeDriver();
         wait = new WebDriverWait(driver, 10);
         driver.manage().window().maximize();
-        BasePage basePage = new BasePage(driver);
+        basePage = new BasePage(driver);
         navigation = new Navigation(driver);
     }
 
