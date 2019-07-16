@@ -11,14 +11,13 @@ import java.util.List;
 
 import static lib.Compares.CompareFrstArgBiigerThenSecond;
 import static lib.Compares.CompareTwoIntValue;
+import static lib.Constants.ETALON_UPPER_MENU_ITEMS;
 import static org.testng.Assert.assertEquals;
 
 public class UpperMenuItemsTest extends TestBase {
 
     protected LoginPage loginPage;
     protected MainPage mainPage;
-    protected List<String> etalonItems = Arrays.asList("home", "add new", "groups", "next birthdays", "print all",
-            "print phones", "map", "export", "import");
     private SoftAssert soft = new SoftAssert();
 
     @BeforeMethod
@@ -27,13 +26,13 @@ public class UpperMenuItemsTest extends TestBase {
         mainPage = loginPage.login("admin", "secret");
     }
 
-    @Test
+    @Test(description = "Тест проверяющий пункты верхнего меню")
     public void upperMenuItemsTest(){
         List<String> linksName = mainPage.getUpperMenuItemsList();
-        CompareTwoIntValue(linksName.size(), etalonItems.size(),
+        CompareTwoIntValue(linksName.size(), ETALON_UPPER_MENU_ITEMS.size(),
                 "Количество пунктов меню должно совпадать с количеством пунктов в эталонном списке");
         for (int i = 0; i < linksName.size(); i++){
-           soft.assertEquals(linksName.get(i), etalonItems.get(i),
+           soft.assertEquals(linksName.get(i), ETALON_UPPER_MENU_ITEMS.get(i),
                    "Название пунтка меню не совпадает с ожидаемым");
         }
         soft.assertAll();

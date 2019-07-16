@@ -12,6 +12,7 @@ public class GroupsPage extends BasePage {
     private static final By GROUP_IN_LIST = By.cssSelector("span.group");
     private static final By GROUP_CHECKBOX_INPUT = By.cssSelector("input[type='checkbox']");
     private static final By DELETE_GROUP_BUTTON_UPPER = By.xpath("//input[@name='delete'][1]");
+    private static final By EDIT_GROUP_BUTTON_UPPER = By.xpath("//input[@name='edit'][1]");
 
     public GroupsPage(WebDriver driver) {
         super(driver);
@@ -32,9 +33,14 @@ public class GroupsPage extends BasePage {
         return this;
     }
 
-    public GroupsPage pressDeleteBtn() {
+    public GroupsPage pressDeleteGroupBtn() {
         clickByElement(DELETE_GROUP_BUTTON_UPPER);
         return this;
+    }
+
+    public AddGroupPage pressEditGroupBtn(){
+        clickByElement(EDIT_GROUP_BUTTON_UPPER);
+        return new AddGroupPage(driver);
     }
 
     public GroupsPage checkMessageBox() {

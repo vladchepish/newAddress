@@ -21,13 +21,13 @@ public class GroupCreationTests extends TestBase {
         loginPage.login("admin", "secret");
     }
 
-    @Test
-    public void testContactCreation(){
+    @Test(description = "Тест, который создаёт новую группу")
+    public void testGroupCreation(){
         groupsPage = navigation.openGroupsPage();
         int groupNumberBefore = groupsPage.countGroups();
-        Group roup = generateRandomGroup();
+        Group group = generateRandomGroup();
         addGroupPage = groupsPage.pressAddNewGroupBtn();
-        addGroupPage.fillGroupCreationFields(roup);
+        addGroupPage.fillGroupCreationFields(group);
         successPage = addGroupPage.pressEnterInformationBtn();
         successPage.clickOnReturnLink();
         int groupNumberAfter = groupsPage.countGroups();

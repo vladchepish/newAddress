@@ -11,6 +11,7 @@ public class AddGroupPage extends BasePage {
     private static final By GROUP_HEADER_TEXTAREA = By.cssSelector("textarea[name='group_header']");
     private static final By GROUP_FOOTER_TEXTAREA = By.cssSelector("textarea[name='group_footer']");
     private static final By SUBMIN_BTN = By.cssSelector("input[name='submit']");
+    private static final By UPDATE_BTN = By.cssSelector("input[name='update']");
 
     public AddGroupPage(WebDriver driver) {
         super(driver);
@@ -34,6 +35,11 @@ public class AddGroupPage extends BasePage {
 
     public SuccessCreationGroupPage pressEnterInformationBtn(){
         clickByElement(SUBMIN_BTN);
+        return new SuccessCreationGroupPage(driver);
+    }
+
+    public SuccessCreationGroupPage pressUpdateBtn(){
+        clickByElement(UPDATE_BTN);
         return new SuccessCreationGroupPage(driver);
     }
 

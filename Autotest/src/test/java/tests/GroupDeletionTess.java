@@ -23,7 +23,7 @@ public class GroupDeletionTess extends TestBase {
         groupsPage = navigation.openGroupsPage();
         int groupNumberBefore = groupsPage.countGroups();
         groupsPage.selectFirstGroupInList();
-        groupsPage.pressDeleteBtn();
+        groupsPage.pressDeleteGroupBtn();
         groupsPage.checkMessageBox();
         navigation.openGroupsPage();
         int groupNumberAfter = groupsPage.countGroups();

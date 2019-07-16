@@ -22,7 +22,7 @@ public class ContactCreationTest extends TestBase{
         mainPage = loginPage.login("admin", "secret");
     }
 
-    @Test
+    @Test(description = "Тест, который создаёт контакт")
     public void testContactCreation(){
         int contactsNumberBefore = mainPage.countContacts();
         Contact contact = generateRandomContact();

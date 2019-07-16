@@ -7,7 +7,7 @@ public class LoginTest extends TestBase{
 
     protected LoginPage loginPage;
 
-    @Test
+    @Test(description = "Тест, который логинится в приложение")
     public void loginTest(){
         loginPage = navigation.openLoginPage();
         loginPage.typeLogin("admin");
