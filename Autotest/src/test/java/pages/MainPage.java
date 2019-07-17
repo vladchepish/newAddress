@@ -16,6 +16,7 @@ public class MainPage extends BasePage {
     private static final By CONTACT_LINE_IN_TABLE = By.cssSelector("tr[name='entry']");
     private static final By CONTACT_CHECKBOX_INPUT = By.cssSelector("table#maintable input[type='checkbox']");
     private static final By DELETE_BUTTON = By.cssSelector("input[value='Delete']");
+    private static final By EDIT_CONTACT_BUTTON = By.cssSelector("table#maintable a[href*='edit']");
 
     public MainPage(WebDriver driver) {
         super(driver);
@@ -46,5 +47,10 @@ public class MainPage extends BasePage {
 
     public void confirmDeletion() {
         driver.switchTo().alert().accept();
+    }
+
+    public AddContactPage pressEditFirstContactBtn() {
+        clickByElement(EDIT_CONTACT_BUTTON);
+        return new AddContactPage(driver);
     }
 }

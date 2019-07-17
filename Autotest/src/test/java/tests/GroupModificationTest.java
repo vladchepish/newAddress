@@ -32,7 +32,5 @@ public class GroupModificationTest extends TestBase {
         addGroupPage.fillGroupCreationFields(group);
         successPage = addGroupPage.pressUpdateBtn();
         successPage.clickOnReturnLink();
-
     }
-
 }

@@ -33,6 +33,7 @@ public class AddContactPage extends BasePage {
     private static final By HOME_SECOND_PHONE = By.cssSelector("input[name='phone2']");
     private static final By NOTES_TEXTAREA = By.cssSelector("textarea[name='notes']");
     private static final By FIRST_ENTER_BUTTON = By.xpath("//input[@name='submit'][1]");
+    private static final By FIRST_UPDATE_BYTTON = By.xpath("//input[@value='Update'][1]");
     private static final By SECOND_ENTER_BUTTON = By.xpath("//input[@name='submit'][2]");
 
     public AddContactPage(WebDriver driver) {
@@ -88,6 +89,11 @@ public class AddContactPage extends BasePage {
 
     public AddContactPage pressEnterBtn(){
         clickByElement(FIRST_ENTER_BUTTON);
+        return this;
+    }
+
+    public AddContactPage pressUpdateBtn() {
+        clickByElement(FIRST_UPDATE_BYTTON);
         return this;
     }
 }
