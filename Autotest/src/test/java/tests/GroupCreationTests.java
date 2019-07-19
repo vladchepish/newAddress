@@ -22,11 +22,11 @@ public class GroupCreationTests extends TestBase {
     public void loginMethod(){
         loginPage = navigation.openLoginPage();
         loginPage.login("admin", "secret");
+        groupsPage = navigation.openGroupsPage();
     }
 
     @Test(description = "Тест, который создаёт новую группу")
     public void testGroupCreation(){
-        groupsPage = navigation.openGroupsPage();
         int groupNumberBefore = groupsPage.countGroups();
         Group group = generateRandomGroup();
         addGroupPage = groupsPage.pressAddNewGroupBtn();
