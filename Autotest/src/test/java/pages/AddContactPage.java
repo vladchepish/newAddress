@@ -4,6 +4,7 @@ import objects.Contact;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 
 public class AddContactPage extends BasePage {
 
@@ -66,25 +67,82 @@ public class AddContactPage extends BasePage {
         return this;
     }
 
-    private AddContactPage setHomePhone(String value){
+    private void setHomePhone(String value) {
         findAndFeelField(HOME_PHONE_INPUT, value);
-        return this;
     }
 
-    private AddContactPage setMobilePhone(String value){
+    private void setMobilePhone(String value) {
         findAndFeelField(MOBILE_PHONE_INPUT, value);
-        return this;
     }
 
-    public AddContactPage fillContactCreationField(Contact contact){
+    private void setCompany(String value) {
+        findAndFeelField(COMPANY_INPUT, value);
+    }
+
+    private void setWorkPhone(String value) {
+        findAndFeelField(WORK_PHONE_INPUT, value);
+    }
+
+    private void setFax(String value) {
+        findAndFeelField(FAX_PHONE_INPUT, value);
+    }
+
+    private void setFirstEmail(String value) {
+        findAndFeelField(FIRST_EMAIL_INPUT, value);
+    }
+
+    private void setSecondEmail(String value) {
+        findAndFeelField(SECOND_EMAIL_INPUT, value);
+    }
+
+    private void setThirdEmail(String value) {
+        findAndFeelField(THIRD_EMAIL_INPUT, value);
+    }
+
+    private void setHomepage(String value) {
+        findAndFeelField(HOMEPAGE_INPUT, value);
+    }
+
+    private void setSecondAddress(String value) {
+        findAndFeelField(ADDRESS_SECOND_TEXTAREA, value);
+    }
+
+    private void setHomeSecondPhone(String value) {
+        findAndFeelField(HOME_SECOND_PHONE, value);
+    }
+
+    private void setNotes(String value) {
+        findAndFeelField(NOTES_TEXTAREA, value);
+    }
+
+    private void setGroup(String value) {
+        new Select(getElement(GROUP_SELECT)).selectByVisibleText(value);
+    }
+
+    public void fillContactCreationField(Contact contact, boolean isGroupPresenr) {
+        fillContactCreationField(contact);
+        setGroup(contact.getGroup());
+    }
+
+    public void fillContactCreationField(Contact contact) {
         setFirstName(contact.getFirstName());
         setMiddleName(contact.getMiddleName());
         setLastName(contact.getLastName());
         setNickName(contact.getNickName());
+        setCompany(contact.getCompany());
         setAddress(contact.getAddress());
         setHomePhone(contact.getHomePhone());
         setMobilePhone(contact.getMobilePhone());
-        return this;
+        setWorkPhone(contact.getWorkPhone());
+        setHomePhone(contact.getHomePhone());
+        setFax(contact.getFax());
+        setFirstEmail(contact.getFirstEmail());
+        setSecondEmail(contact.getSecondEmail());
+        setThirdEmail(contact.getThirdEmail());
+        setHomepage(contact.getHomepage());
+        setSecondAddress(contact.getSecondAddress());
+        setHomeSecondPhone(contact.getSecondHome());
+        setNotes(contact.getSecondNotes());
     }
 
     public AddContactPage pressEnterBtn(){

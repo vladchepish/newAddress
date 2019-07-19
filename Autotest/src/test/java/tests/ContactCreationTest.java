@@ -7,7 +7,7 @@ import pages.AddContactPage;
 import pages.LoginPage;
 import pages.MainPage;
 
-import static Utils.CustomObjectsGenerator.*;
+import static Utils.CustomObjectsGenerator.generateRandomContact;
 import static lib.Compares.CompareTwoIntValue;
 
 public class ContactCreationTest extends TestBase{
@@ -26,8 +26,9 @@ public class ContactCreationTest extends TestBase{
     public void testContactCreation(){
         int contactsNumberBefore = mainPage.countContacts();
         Contact contact = generateRandomContact();
+        contact.setGroup("testName");
         addContactPage = navigation.openAddContactPage();
-        addContactPage.fillContactCreationField(contact);
+        addContactPage.fillContactCreationField(contact, true);
         addContactPage.pressEnterBtn();
         navigation.openMainPage();
         int contactsNumberAfter = mainPage.countContacts();

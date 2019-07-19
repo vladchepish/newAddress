@@ -3,7 +3,10 @@ package tests;
 import objects.Group;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pages.*;
+import pages.AddGroupPage;
+import pages.GroupsPage;
+import pages.LoginPage;
+import pages.SuccessCreationGroupPage;
 
 import static Utils.CustomObjectsGenerator.generateRandomGroup;
 import static lib.Compares.CompareTwoIntValue;
@@ -34,5 +37,4 @@ public class GroupCreationTests extends TestBase {
         CompareTwoIntValue(groupNumberBefore + 1, groupNumberAfter,
                 "Количество групп до должно быть на одну меньше, чем количество групп после");
     }
-
 }
