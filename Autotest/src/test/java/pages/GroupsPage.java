@@ -13,6 +13,7 @@ public class GroupsPage extends BasePage {
     private static final By GROUP_CHECKBOX_INPUT = By.cssSelector("input[type='checkbox']");
     private static final By DELETE_GROUP_BUTTON_UPPER = By.xpath("//input[@name='delete'][1]");
     private static final By EDIT_GROUP_BUTTON_UPPER = By.xpath("//input[@name='edit'][1]");
+    private static final By FIRST_GROUP_IN_LIST = By.xpath("//span[@class='group'][1]");
 
     public GroupsPage(WebDriver driver) {
         super(driver);
@@ -47,5 +48,9 @@ public class GroupsPage extends BasePage {
         Assert.assertTrue(getTextFromMEssageBox().contains("Group has been removed"),
                 "Текст в сообщении не содежрит необходимую часть");
         return this;
+    }
+
+    public String getFirstGroupName() {
+        return getElement(FIRST_GROUP_IN_LIST).getText();
     }
 }
