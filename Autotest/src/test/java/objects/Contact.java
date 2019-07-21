@@ -1,5 +1,8 @@
 package objects;
 
+import java.util.List;
+import java.util.Objects;
+
 public class Contact {
 
     private String firstName;
@@ -20,6 +23,9 @@ public class Contact {
     private String secondHome;
     private String secondNotes;
     private String group;
+    private List<String> emails;
+    private List<String> phones;
+    private int id;
 
     public String getFirstName() {
         return firstName;
@@ -181,5 +187,39 @@ public class Contact {
     public Contact setGroup(String group) {
         this.group = group;
         return this;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "Contact{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", address='" + address + '\'' +
+                ", id=" + id +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Contact contact = (Contact) o;
+        return id == contact.id &&
+                Objects.equals(firstName, contact.firstName) &&
+                Objects.equals(lastName, contact.lastName) &&
+                Objects.equals(address, contact.address);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, lastName, address, id);
     }
 }

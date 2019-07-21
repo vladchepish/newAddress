@@ -2,9 +2,13 @@ package tests;
 
 import objects.Contact;
 import objects.Group;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.*;
+
+import java.util.Comparator;
+import java.util.List;
 
 import static Utils.CustomObjectsGenerator.generateRandomContact;
 import static Utils.CustomObjectsGenerator.generateRandomGroup;
@@ -46,15 +50,26 @@ public class ContactModificationTest extends TestBase {
 
     @Test(description = "Тест, который модицицирует первый контакт в списке")
     public void testContactModification() {
-        int contactsNumberBefore = mainPage.countContacts();
+        List<Contact> contactsBefore = mainPage.getContactList();
         Contact contact = generateRandomContact();
+        contact.setId(contactsBefore.get(0).getId());
         addContactPage = mainPage.pressEditFirstContactBtn();
         addContactPage.fillContactCreationField(contact);
         addContactPage.pressUpdateBtn();
         navigation.openMainPage();
-        int contactsNumberAfter = mainPage.countContacts();
-        CompareTwoIntValue(contactsNumberAfter, contactsNumberBefore,
+        List<Contact> contactsAfter = mainPage.getContactList();
+        CompareTwoIntValue(contactsAfter.size(), contactsBefore.size(),
                 "Количество контактов не должно было измениться по результатам работаы теста");
+
+        contactsBefore.remove(0);
+        contactsBefore.add(contact);
+        Comparator<? super Contact> byId = Comparator.comparingInt(Contact::getId);
+        contactsBefore.sort(byId);
+        contactsAfter.sort(byId);
+        Assert.assertEquals(contactsBefore, contactsAfter,
+                "После выполнения теста и змены элементов - списки должны совпадать");
+
+
 
     }
 

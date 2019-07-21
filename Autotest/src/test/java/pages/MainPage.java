@@ -1,5 +1,6 @@
 package pages;
 
+import objects.Contact;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -52,5 +53,19 @@ public class MainPage extends BasePage {
     public AddContactPage pressEditFirstContactBtn() {
         clickByElement(EDIT_CONTACT_BUTTON);
         return new AddContactPage(driver);
+    }
+
+    public List<Contact> getContactList() {
+        List<Contact> contacts = new ArrayList<>();
+        List<WebElement> elements = getElements(CONTACT_LINE_IN_TABLE);
+        for (WebElement e : elements) {
+            Contact contact = new Contact();
+            contact.setLastName(e.findElement(By.xpath(".//td[2]")).getText());
+            contact.setFirstName(e.findElement(By.xpath(".//td[3]")).getText());
+            contact.setAddress(e.findElement(By.xpath(".//td[4]")).getText());
+            contact.setId(Integer.parseInt(e.findElement(By.xpath(".//td[1]//input")).getAttribute("id")));
+            contacts.add(contact);
+        }
+        return contacts;
     }
 }

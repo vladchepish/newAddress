@@ -2,12 +2,17 @@ package tests;
 
 import objects.Contact;
 import objects.Group;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.*;
 
+import java.util.Comparator;
+import java.util.List;
+
 import static Utils.CustomObjectsGenerator.generateRandomContact;
 import static Utils.CustomObjectsGenerator.generateRandomGroup;
+import static java.util.Comparator.comparingInt;
 import static lib.Compares.CompareTwoIntValue;
 
 public class ContactCreationTest extends TestBase{
@@ -38,16 +43,24 @@ public class ContactCreationTest extends TestBase{
 
     @Test(description = "Тест, который создаёт контакт")
     public void testContactCreation(){
-        int contactsNumberBefore = mainPage.countContacts();
+        List<Contact> contactsBefore = mainPage.getContactList();
         Contact contact = generateRandomContact();
         contact.setGroup(groupName);
         addContactPage = navigation.openAddContactPage();
         addContactPage.fillContactCreationField(contact, true);
         addContactPage.pressEnterBtn();
         navigation.openMainPage();
-        int contactsNumberAfter = mainPage.countContacts();
-        CompareTwoIntValue(contactsNumberAfter, contactsNumberBefore + 1,
+        List<Contact> contactsAfter = mainPage.getContactList();
+        CompareTwoIntValue(contactsAfter.size(), contactsBefore.size() + 1,
                 "Количество контактов до должно быть на одну меньше, чем количество групп после");
+
+        contact.setId(contactsAfter.stream().max(comparingInt(Contact::getId)).get().getId());
+        contactsBefore.add(contact);
+        Comparator<? super Contact> byId = Comparator.comparingInt(Contact::getId);
+        contactsBefore.sort(byId);
+        contactsAfter.sort(byId);
+        Assert.assertEquals(contactsBefore, contactsAfter,
+                "После выполнения теста и змены элементов - списки должны совпадать");
 
     }
 
