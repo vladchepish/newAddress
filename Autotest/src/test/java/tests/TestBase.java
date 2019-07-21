@@ -6,21 +6,22 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
 import pages.BasePage;
 import pages.Navigation;
 
 
 public class TestBase {
 
-    protected BasePage basePage;
-    protected WebDriver driver;
-    protected WebDriverWait wait;
-    protected Navigation navigation;
+    protected static BasePage basePage;
+    protected static WebDriver driver;
+    protected static WebDriverWait wait;
+    protected static Navigation navigation;
 
-    @BeforeClass
-    public void beforeClass() {
+    @BeforeSuite
+    public static void beforeClass() {
         String browser = BrowserType.CHROME;
         if (browser.equals(BrowserType.CHROME)) {
             driver = new ChromeDriver();
@@ -35,7 +36,12 @@ public class TestBase {
         navigation = new Navigation(driver);
     }
 
-    @AfterClass
+    @AfterMethod
+    public void cleanCoockey() {
+        driver.manage().deleteAllCookies();
+    }
+
+    @AfterSuite
     public void afterClass(){
         driver.quit();
     }
