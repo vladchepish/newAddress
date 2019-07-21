@@ -9,7 +9,7 @@ import pages.GroupsPage;
 import pages.LoginPage;
 import pages.SuccessCreationGroupPage;
 
-import java.util.HashSet;
+import java.util.Comparator;
 import java.util.List;
 
 import static Utils.CustomObjectsGenerator.generateRandomGroup;
@@ -49,9 +49,17 @@ public class GroupModificationTest extends TestBase {
         List<Group> groupAfter = groupsPage.getGroupsList();
         CompareTwoIntValue(groupsBefore.size(), groupAfter.size(),
                 "Количество групп не должно было измениться в процессе выполнения теста");
+
         groupsBefore.remove(groupsBefore.size() - 1);
         groupsBefore.add(group);
-        Assert.assertEquals(new HashSet<>(groupAfter), new HashSet<>(groupsBefore),
+
+        // (g1, g2) -> Integer.compare(g1.getGroupId(), g2.getGroupId()
+        // equal to
+        // Comparator.comparingInt(Group::getGroupId)
+        Comparator<? super Group> byId = Comparator.comparingInt(Group::getGroupId);
+        groupsBefore.sort(byId);
+        groupAfter.sort(byId);
+        Assert.assertEquals(groupsBefore, groupAfter,
                 "После выполнения теста и замены элемента в финальном списке - спики должны совпадать");
 
     }

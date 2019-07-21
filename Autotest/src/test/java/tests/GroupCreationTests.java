@@ -9,7 +9,7 @@ import pages.GroupsPage;
 import pages.LoginPage;
 import pages.SuccessCreationGroupPage;
 
-import java.util.HashSet;
+import java.util.Comparator;
 import java.util.List;
 
 import static Utils.CustomObjectsGenerator.generateRandomGroup;
@@ -42,15 +42,12 @@ public class GroupCreationTests extends TestBase {
         CompareTwoIntValue(groupsBefore.size() + 1, groupAfter.size(),
                 "Количество групп до должно быть на одну меньше, чем количество групп после");
 
-        int max = 0;
-        for (Group g : groupAfter) {
-            if (g.getGroupId() > max) {
-                max = g.getGroupId();
-            }
-        }
         group.setGroupId(groupAfter.stream().max(comparingInt(Group::getGroupId)).get().getGroupId());
         groupsBefore.add(group);
-        Assert.assertEquals(new HashSet<>(groupAfter), new HashSet<>(groupsBefore),
+        Comparator<? super Group> byId = Comparator.comparingInt(Group::getGroupId);
+        groupsBefore.sort(byId);
+        groupAfter.sort(byId);
+        Assert.assertEquals(groupAfter, groupsBefore,
                 "После выполнения теста и добавления элемента в начальный списке - спики должны совпадать");
     }
 }
