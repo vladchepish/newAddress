@@ -1,9 +1,14 @@
 package pages;
 
+import objects.Group;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GroupsPage extends BasePage {
 
@@ -34,6 +39,11 @@ public class GroupsPage extends BasePage {
         return this;
     }
 
+    public void selectGroupByPosition(int index) {
+        List<WebElement> elements = getElements(GROUP_CHECKBOX_INPUT);
+        elements.get(index).click();
+    }
+
     public GroupsPage pressDeleteGroupBtn() {
         clickByElement(DELETE_GROUP_BUTTON_UPPER);
         return this;
@@ -52,5 +62,17 @@ public class GroupsPage extends BasePage {
 
     public String getFirstGroupName() {
         return getElement(FIRST_GROUP_IN_LIST).getText();
+    }
+
+    public List<Group> getGroupsList() {
+        List<Group> groupsList = new ArrayList<Group>();
+        List<WebElement> elements = getElements(GROUP_IN_LIST);
+        for (WebElement e : elements) {
+            Group group = new Group();
+            group.setGroupName(e.getText());
+            group.setGroupId(Integer.parseInt(e.findElement(By.cssSelector("input")).getAttribute("value")));
+            groupsList.add(group);
+        }
+        return groupsList;
     }
 }

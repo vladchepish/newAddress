@@ -1,12 +1,15 @@
 package tests;
 
 import objects.Group;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.AddGroupPage;
 import pages.GroupsPage;
 import pages.LoginPage;
 import pages.SuccessCreationGroupPage;
+
+import java.util.List;
 
 import static Utils.CustomObjectsGenerator.generateRandomGroup;
 import static lib.Compares.CompareTwoIntValue;
@@ -35,13 +38,16 @@ public class GroupDeletionTess extends TestBase {
     @Test(description = "Тест, который удаляет случайно выбранную группу")
     public void testGroupDeletion(){
         groupsPage = navigation.openGroupsPage();
-        int groupNumberBefore = groupsPage.countGroups();
-        groupsPage.selectFirstGroupInList();
+        List<Group> groupsBefore = groupsPage.getGroupsList();
+        groupsPage.selectGroupByPosition(groupsBefore.size() - 1);
         groupsPage.pressDeleteGroupBtn();
         groupsPage.checkMessageBox();
         navigation.openGroupsPage();
-        int groupNumberAfter = groupsPage.countGroups();
-        CompareTwoIntValue(groupNumberBefore, groupNumberAfter + 1,
+        List<Group> groupAfter = groupsPage.getGroupsList();
+        CompareTwoIntValue(groupsBefore.size(), groupAfter.size()
+                        + 1,
                 "Количество групп после должно быть на одну меньше, чем количество групп до");
+        groupsBefore.remove(groupsBefore.size() - 1);
+        Assert.assertEquals(groupAfter, groupsBefore, "Списки групп должны совпадать");
     }
 }
