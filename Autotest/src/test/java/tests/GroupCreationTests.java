@@ -3,6 +3,7 @@ package tests;
 import objects.Group;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import pages.AddGroupPage;
 import pages.GroupsPage;
@@ -11,6 +12,7 @@ import pages.SuccessCreationGroupPage;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 import static Utils.CustomObjectsGenerator.generateRandomGroup;
 import static java.util.Comparator.comparingInt;
@@ -30,8 +32,9 @@ public class GroupCreationTests extends TestBase {
         groupsPage = navigation.openGroupsPage();
     }
 
+    @Ignore()
     @Test(description = "Тест, который создаёт новую группу")
-    public void testGroupCreation(){
+    public void testGroupCreationUsingList() {
         List<Group> groupsBefore = groupsPage.getGroupsList();
         Group group = generateRandomGroup();
         addGroupPage = groupsPage.pressAddNewGroupBtn();
@@ -47,6 +50,24 @@ public class GroupCreationTests extends TestBase {
         Comparator<? super Group> byId = Comparator.comparingInt(Group::getGroupId);
         groupsBefore.sort(byId);
         groupAfter.sort(byId);
+        Assert.assertEquals(groupAfter, groupsBefore,
+                "После выполнения теста и добавления элемента в начальный списке - спики должны совпадать");
+    }
+
+    @Test(description = "Тест, который создаёт новую группу")
+    public void testGroupCreationUsingSet() {
+        Set<Group> groupsBefore = groupsPage.getGroupsSet();
+        Group group = generateRandomGroup();
+        addGroupPage = groupsPage.pressAddNewGroupBtn();
+        addGroupPage.fillGroupCreationFields(group);
+        successPage = addGroupPage.pressEnterInformationBtn();
+        successPage.clickOnReturnLink();
+        Set<Group> groupAfter = groupsPage.getGroupsSet();
+        CompareTwoIntValue(groupsBefore.size() + 1, groupAfter.size(),
+                "Количество групп до должно быть на одну меньше, чем количество групп после");
+
+        group.setGroupId(groupAfter.stream().mapToInt((g) -> g.getGroupId()).max().getAsInt());
+        groupsBefore.add(group);
         Assert.assertEquals(groupAfter, groupsBefore,
                 "После выполнения теста и добавления элемента в начальный списке - спики должны совпадать");
     }

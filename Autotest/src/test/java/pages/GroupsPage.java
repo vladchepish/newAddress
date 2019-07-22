@@ -8,7 +8,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class GroupsPage extends BasePage {
 
@@ -44,6 +46,17 @@ public class GroupsPage extends BasePage {
         elements.get(index).click();
     }
 
+    public void selectGroupById(int id) {
+        getElement(By.cssSelector("input[value='" + id + "']")).click();
+    }
+
+    public void deleteGroup(Group group) {
+        selectGroupById(group.getGroupId());
+        pressDeleteGroupBtn();
+        checkMessageBox();
+
+    }
+
     public GroupsPage pressDeleteGroupBtn() {
         clickByElement(DELETE_GROUP_BUTTON_UPPER);
         return this;
@@ -66,6 +79,18 @@ public class GroupsPage extends BasePage {
 
     public List<Group> getGroupsList() {
         List<Group> groupsList = new ArrayList<Group>();
+        List<WebElement> elements = getElements(GROUP_IN_LIST);
+        for (WebElement e : elements) {
+            Group group = new Group();
+            group.setGroupName(e.getText());
+            group.setGroupId(Integer.parseInt(e.findElement(By.cssSelector("input")).getAttribute("value")));
+            groupsList.add(group);
+        }
+        return groupsList;
+    }
+
+    public Set<Group> getGroupsSet() {
+        Set<Group> groupsList = new HashSet<>();
         List<WebElement> elements = getElements(GROUP_IN_LIST);
         for (WebElement e : elements) {
             Group group = new Group();
