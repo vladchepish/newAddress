@@ -7,7 +7,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class MainPage extends BasePage {
 
@@ -55,6 +57,11 @@ public class MainPage extends BasePage {
         return new AddContactPage(driver);
     }
 
+    public AddContactPage pressEditContact(Contact contact) {
+        getElement(By.cssSelector("a[href='edit.php?id=" + contact.getId() + "']")).click();
+        return new AddContactPage(driver);
+    }
+
     public List<Contact> getContactList() {
         List<Contact> contacts = new ArrayList<>();
         List<WebElement> elements = getElements(CONTACT_LINE_IN_TABLE);
@@ -68,4 +75,28 @@ public class MainPage extends BasePage {
         }
         return contacts;
     }
+
+    public Set<Contact> getContactSet() {
+        Set<Contact> contacts = new HashSet<>();
+        List<WebElement> elements = getElements(CONTACT_LINE_IN_TABLE);
+        for (WebElement e : elements) {
+            Contact contact = new Contact();
+            contact.setLastName(e.findElement(By.xpath(".//td[2]")).getText());
+            contact.setFirstName(e.findElement(By.xpath(".//td[3]")).getText());
+            contact.setAddress(e.findElement(By.xpath(".//td[4]")).getText());
+            contact.setId(Integer.parseInt(e.findElement(By.xpath(".//td[1]//input")).getAttribute("id")));
+            contact.setAllPhones(e.findElement(By.xpath(".//td[6]")).getText().replaceAll("\n", " ").trim());
+            contact.setAllEmails(e.findElement(By.xpath(".//td[5]")).getText().replaceAll("\n", " ").trim());
+            contacts.add(contact);
+        }
+        return contacts;
+    }
+
+    public Contact getRandomContactFromTable() {
+        Set<Contact> contacts = getContactSet();
+        Contact contact = contacts.iterator().next();
+        return contact;
+    }
+
+
 }

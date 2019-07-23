@@ -8,7 +8,7 @@ import pages.GroupsPage;
 import pages.LoginPage;
 import pages.SuccessCreationGroupPage;
 
-import java.util.List;
+import java.util.Set;
 
 import static Utils.CustomObjectsGenerator.generateRandomGroup;
 import static lib.Compares.CompareTwoIntValue;
@@ -37,11 +37,11 @@ public class GroupDeletionTess extends TestBase {
 
     @Test(description = "Тест, который удаляет случайно выбранную группу")
     public void testGroupDeletion(){
-        List<Group> groupsBefore = groupsPage.getGroupsList();
+        Set<Group> groupsBefore = groupsPage.getGroupsSet();
         Group deletedGroup = groupsBefore.iterator().next();
         groupsPage.deleteGroup(deletedGroup);
         navigation.openGroupsPage();
-        List<Group> groupAfter = groupsPage.getGroupsList();
+        Set<Group> groupAfter = groupsPage.getGroupsSet();
         CompareTwoIntValue(groupsBefore.size(), groupAfter.size() + 1,
                 "Количество групп после должно быть на одну меньше, чем количество групп до");
         groupsBefore.remove(deletedGroup);

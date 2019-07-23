@@ -1,6 +1,5 @@
 package objects;
 
-import java.util.List;
 import java.util.Objects;
 
 public class Contact {
@@ -23,8 +22,8 @@ public class Contact {
     private String secondHome;
     private String secondNotes;
     private String group;
-    private List<String> emails;
-    private List<String> phones;
+    private String allEmails;
+    private String allPhones;
     private int id;
 
     public String getFirstName() {
@@ -197,13 +196,30 @@ public class Contact {
         this.id = id;
     }
 
+    public String getAllEmails() {
+        return allEmails;
+    }
+
+    public void setAllEmails(String allEmails) {
+        this.allEmails = allEmails;
+    }
+
+    public String getAllPhones() {
+        return allPhones;
+    }
+
+    public void setAllPhones(String allPhones) {
+        this.allPhones = allPhones;
+    }
+
     @Override
     public String toString() {
         return "Contact{" +
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", address='" + address + '\'' +
-                ", id=" + id +
+                ", allEmails='" + allEmails + '\'' +
+                ", allPhones='" + allPhones + '\'' +
                 '}';
     }
 
@@ -212,14 +228,15 @@ public class Contact {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Contact contact = (Contact) o;
-        return id == contact.id &&
-                Objects.equals(firstName, contact.firstName) &&
+        return Objects.equals(firstName, contact.firstName) &&
                 Objects.equals(lastName, contact.lastName) &&
-                Objects.equals(address, contact.address);
+                Objects.equals(address, contact.address) &&
+                Objects.equals(allEmails, contact.allEmails) &&
+                Objects.equals(allPhones, contact.allPhones);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstName, lastName, address, id);
+        return Objects.hash(firstName, lastName, address, allEmails, allPhones);
     }
 }

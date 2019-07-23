@@ -6,6 +6,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
+import java.util.Arrays;
+import java.util.List;
+
+import static Utils.DataHelper.cleanPhone;
+
 public class AddContactPage extends BasePage {
 
     private static final By FIRST_NAME_INPUT = By.cssSelector("input[name='firstname']");
@@ -153,5 +158,50 @@ public class AddContactPage extends BasePage {
     public AddContactPage pressUpdateBtn() {
         clickByElement(FIRST_UPDATE_BYTTON);
         return this;
+    }
+
+    public Contact getContact() {
+        Contact contact = new Contact();
+        contact.setFirstName(getTextFromInput(FIRST_NAME_INPUT));
+        contact.setMiddleName(getTextFromInput(MIDDLE_NAME_INPUT));
+        contact.setLastName(getTextFromInput(LAST_NAME_INPUT));
+        contact.setNickName(getTextFromInput(NICKNAME_INPUT));
+        contact.setAddress(getTextFromInput(ADDRESS_TEXTAREA));
+        contact.setCompany(getTextFromInput(COMPANY_INPUT));
+        contact.setWorkPhone(getTextFromInput(WORK_PHONE_INPUT));
+        contact.setHomePhone(getTextFromInput(HOME_PHONE_INPUT));
+        contact.setMobilePhone(getTextFromInput(MOBILE_PHONE_INPUT));
+        contact.setFirstEmail(getTextFromInput(FIRST_EMAIL_INPUT));
+        contact.setSecondEmail(getTextFromInput(SECOND_EMAIL_INPUT));
+        contact.setThirdEmail(getTextFromInput(THIRD_EMAIL_INPUT));
+        contact.setSecondHome(getTextFromInput(HOME_SECOND_PHONE));
+        contact.setAllPhones(buildAllPhones(cleanPhone(contact.getHomePhone()),
+                cleanPhone(contact.getMobilePhone()),
+                cleanPhone(contact.getWorkPhone()),
+                cleanPhone(contact.getSecondHome())));
+        contact.setAllEmails(buildAllEmails(contact.getFirstEmail(), contact.getSecondEmail(), contact.getThirdEmail()));
+        return contact;
+    }
+
+    private String buildAllEmails(String firstEmail, String secondEmail, String thirdEmail) {
+        String allEmails = "";
+        List<String> emails = Arrays.asList(firstEmail, secondEmail, thirdEmail);
+        for (String e : emails) {
+            if (e != null || !e.equals("")) {
+                allEmails = allEmails + e + " ";
+            }
+        }
+        return allEmails.trim();
+    }
+
+    private String buildAllPhones(String homePhone, String mobilePhone, String workPhone, String secondHomePhone) {
+        String allPhones = "";
+        List<String> phones = Arrays.asList(homePhone, mobilePhone, workPhone, secondHomePhone);
+        for (String p : phones) {
+            if (p != null || p.equals("")) {
+                allPhones = allPhones + p + " ";
+            }
+        }
+        return allPhones.trim();
     }
 }
