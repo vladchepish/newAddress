@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
@@ -124,6 +125,10 @@ public class AddContactPage extends BasePage {
         new Select(getElement(GROUP_SELECT)).selectByVisibleText(value);
     }
 
+    private void setPhoto(File file) {
+        getElement(PHOTO_INPUT).sendKeys(file.getAbsolutePath());
+    }
+
     public void fillContactCreationField(Contact contact, boolean isGroupPresenr) {
         fillContactCreationField(contact);
         setGroup(contact.getGroup());
@@ -134,6 +139,7 @@ public class AddContactPage extends BasePage {
         setMiddleName(contact.getMiddleName());
         setLastName(contact.getLastName());
         setNickName(contact.getNickName());
+        setPhoto(contact.getPhoto());
         setCompany(contact.getCompany());
         setAddress(contact.getAddress());
         setHomePhone(contact.getHomePhone());

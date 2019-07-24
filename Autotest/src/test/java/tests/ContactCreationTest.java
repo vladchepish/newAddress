@@ -7,6 +7,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.*;
 
+import java.io.File;
 import java.util.Comparator;
 import java.util.List;
 
@@ -44,8 +45,10 @@ public class ContactCreationTest extends TestBase{
     @Test(description = "Тест, который создаёт контакт")
     public void testContactCreation(){
         List<Contact> contactsBefore = mainPage.getContactList();
+        File photo = new File("src/test/resources/photo.jpg");
         Contact contact = generateRandomContact();
         contact.setGroup(groupName);
+        contact.setPhoto(photo);
         addContactPage = navigation.openAddContactPage();
         addContactPage.fillContactCreationField(contact, true);
         addContactPage.pressEnterBtn();

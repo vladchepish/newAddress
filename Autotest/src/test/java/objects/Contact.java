@@ -1,5 +1,6 @@
 package objects;
 
+import java.io.File;
 import java.util.Objects;
 
 public class Contact {
@@ -25,6 +26,7 @@ public class Contact {
     private String allEmails;
     private String allPhones;
     private int id;
+    private File photo;
 
     public String getFirstName() {
         return firstName;
@@ -210,6 +212,14 @@ public class Contact {
 
     public void setAllPhones(String allPhones) {
         this.allPhones = allPhones;
+    }
+
+    public File getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(File photo) {
+        this.photo = photo;
     }
 
     @Override
