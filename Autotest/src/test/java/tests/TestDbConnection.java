@@ -27,7 +27,9 @@ public class TestDbConnection {
              rs.close();
              st.close();
              conn.close();
-             System.out.println(groups);
+            for (Group g : groups) {
+                System.out.println(g);
+            }
         } catch (SQLException ex) {
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());
