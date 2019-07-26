@@ -2,7 +2,6 @@ package tests;
 
 import objects.Contact;
 import objects.Group;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.*;
@@ -13,6 +12,7 @@ import java.util.List;
 import static Utils.CustomObjectsGenerator.generateRandomContact;
 import static Utils.CustomObjectsGenerator.generateRandomGroup;
 import static lib.Compares.CompareTwoIntValue;
+import static org.testng.Assert.assertEquals;
 
 public class ContactModificationTest extends TestBase {
 
@@ -66,11 +66,7 @@ public class ContactModificationTest extends TestBase {
         Comparator<? super Contact> byId = Comparator.comparingInt(Contact::getId);
         contactsBefore.sort(byId);
         contactsAfter.sort(byId);
-        Assert.assertEquals(contactsBefore, contactsAfter,
+        assertEquals(contactsBefore, contactsAfter,
                 "После выполнения теста и змены элементов - списки должны совпадать");
-
-
-
     }
-
 }

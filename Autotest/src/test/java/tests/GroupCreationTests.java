@@ -1,7 +1,6 @@
 package tests;
 
 import objects.Group;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
@@ -17,6 +16,7 @@ import java.util.Set;
 import static Utils.CustomObjectsGenerator.generateRandomGroup;
 import static java.util.Comparator.comparingInt;
 import static lib.Compares.CompareTwoIntValue;
+import static org.testng.Assert.assertEquals;
 
 public class GroupCreationTests extends TestBase {
 
@@ -50,7 +50,7 @@ public class GroupCreationTests extends TestBase {
         Comparator<? super Group> byId = Comparator.comparingInt(Group::getGroupId);
         groupsBefore.sort(byId);
         groupAfter.sort(byId);
-        Assert.assertEquals(groupAfter, groupsBefore,
+        assertEquals(groupAfter, groupsBefore,
                 "После выполнения теста и добавления элемента в начальный списке - спики должны совпадать");
     }
 
@@ -68,7 +68,7 @@ public class GroupCreationTests extends TestBase {
 
         group.setGroupId(groupAfter.stream().mapToInt((g) -> g.getGroupId()).max().getAsInt());
         groupsBefore.add(group);
-        Assert.assertEquals(groupAfter, groupsBefore,
+        assertEquals(groupAfter, groupsBefore,
                 "После выполнения теста и добавления элемента в начальный списке - спики должны совпадать");
     }
 }

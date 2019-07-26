@@ -1,7 +1,6 @@
 package tests;
 
 import objects.Group;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.AddGroupPage;
@@ -13,6 +12,7 @@ import java.util.Set;
 
 import static Utils.CustomObjectsGenerator.generateRandomGroup;
 import static lib.Compares.CompareTwoIntValue;
+import static org.testng.Assert.assertEquals;
 
 public class GroupModificationTest extends TestBase {
 
@@ -49,7 +49,6 @@ public class GroupModificationTest extends TestBase {
         Set<Group> groupAfter = groupsPage.getGroupsSet();
         CompareTwoIntValue(groupsBefore.size(), groupAfter.size(),
                 "Количество групп не должно было измениться в процессе выполнения теста");
-
         groupsBefore.remove(modifiedGroup);
         groupsBefore.add(group);
 
@@ -61,7 +60,7 @@ public class GroupModificationTest extends TestBase {
         //Comparator<? super Group> byId = Comparator.comparingInt(Group::getGroupId);
         //groupsBefore.sort(byId);
         //groupAfter.sort(byId);
-        Assert.assertEquals(groupsBefore, groupAfter,
+        assertEquals(groupsBefore, groupAfter,
                 "После выполнения теста и замены элемента в финальном списке - спики должны совпадать");
 
     }

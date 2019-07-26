@@ -2,12 +2,12 @@ package tests;
 
 import objects.Contact;
 import objects.Group;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.*;
 
 import static Utils.CustomObjectsGenerator.generateRandomGroup;
+import static org.testng.Assert.assertEquals;
 
 public class CompareContactInsideAndInTable extends TestBase {
 
@@ -42,6 +42,6 @@ public class CompareContactInsideAndInTable extends TestBase {
         addContactPage = mainPage.pressEditContact(contact);
         Contact contactFromEditForm = addContactPage.getContact();
         System.out.println(contactFromEditForm);
-        Assert.assertEquals(contact, contactFromEditForm);
+        assertEquals(contact, contactFromEditForm);
     }
 }
