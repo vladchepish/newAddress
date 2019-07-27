@@ -17,7 +17,6 @@ public class TestHbConnection {
 
     @BeforeClass
     protected void setUp() throws Exception {
-        // A SessionFactory is set up once for an application!
         final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .configure() // configures settings from hibernate.cfg.xml
                 .build();
@@ -26,8 +25,6 @@ public class TestHbConnection {
         }
         catch (Exception e) {
             e.printStackTrace();
-            // The registry would be destroyed by the SessionFactory, but we had trouble building the SessionFactory
-            // so destroy it manually.
             StandardServiceRegistryBuilder.destroy( registry );
         }
     }
@@ -37,7 +34,7 @@ public class TestHbConnection {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         List<Group> result = session.createQuery( "from Group" ).list();
-        for ( Group group : (List<Group>) result ) {
+        for (Group group : result) {
             System.out.println(group);
         }
         session.getTransaction().commit();

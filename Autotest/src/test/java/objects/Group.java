@@ -1,12 +1,27 @@
 package objects;
 
+import org.hibernate.annotations.Type;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Objects;
 
+@Entity
+@Table(name = "group_list")
 public class Group {
 
+    @Column(name = "group_name")
     private String groupName;
+    @Column(name = "group_header")
+    @Type(type = "text")
     private String groupHeader;
+    @Column(name = "group_footer")
+    @Type(type = "text")
     private String groupFooter;
+    @Id
+    @Column(name = "group_id")
     private int groupId;
 
     public String getGroupName() {

@@ -14,7 +14,7 @@ public class TestDbConnection {
         Connection conn = null;
         try {
             conn = DriverManager.getConnection("jdbc:mysql://31.31.196.140:3306/u0541324_addressbook?" +
-                    "user=u0541324_address&password=LaubKupoWrabca7");
+                    "user=u0541324_address&password=LaubKupoWrabca7&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");
              Statement st = conn.createStatement();
              ResultSet rs = st.executeQuery("select group_id, group_name, group_header, group_footer from group_list");
              List<Group> groups = new ArrayList<>();

@@ -15,8 +15,9 @@
 
         <!-- Database connection settings -->
         <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <property name="connection.url">jdbc:mysql://u0541324.cp.regruhosting.ru:2083/u0541324_addressbook</property>
-        <property name="connection.username">u0541324_addressbook</property>
+        <property name="connection.url">jdbc:mysql://31.31.196.140:3306/u0541324_addressbook?serverTimezone=UTC
+        </property>
+        <property name="connection.username">u0541324_address</property>
         <property name="connection.password">LaubKupoWrabca7</property>
 
         <!-- JDBC connection pool (use the built-in) -->
