@@ -26,10 +26,9 @@ public class GroupModificationTest extends TestBase {
         loginPage = navigation.openLoginPage();
         loginPage.login("admin", "secret");
         groupsPage = navigation.openGroupsPage();
-        if (groupsPage.countGroups() == 0) {
-            Group groupZero = generateRandomGroup();
+        if (dbHelper.getGroupsList().size() == 0) {
             addGroupPage = groupsPage.pressAddNewGroupBtn();
-            addGroupPage.fillGroupCreationFields(groupZero);
+            addGroupPage.fillGroupCreationFields(generateRandomGroup());
             successPage = addGroupPage.pressEnterInformationBtn();
             successPage.clickOnReturnLink();
         }
@@ -37,7 +36,7 @@ public class GroupModificationTest extends TestBase {
 
     @Test(description = "Тест модифицирует первую в списке группу")
     public void testGroupModification(){
-        Set<Group> groupsBefore = groupsPage.getGroupsSet();
+        Set<Group> groupsBefore = dbHelper.getGroupSet();
         Group modifiedGroup = groupsBefore.iterator().next();
         Group group = generateRandomGroup();
         group.setGroupId(modifiedGroup.getGroupId());
@@ -46,7 +45,7 @@ public class GroupModificationTest extends TestBase {
         addGroupPage.fillGroupCreationFields(group);
         successPage = addGroupPage.pressUpdateBtn();
         successPage.clickOnReturnLink();
-        Set<Group> groupAfter = groupsPage.getGroupsSet();
+        Set<Group> groupAfter = dbHelper.getGroupSet();
         CompareTwoIntValue(groupsBefore.size(), groupAfter.size(),
                 "Количество групп не должно было измениться в процессе выполнения теста");
         groupsBefore.remove(modifiedGroup);

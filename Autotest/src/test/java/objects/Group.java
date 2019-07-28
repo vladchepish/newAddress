@@ -65,12 +65,14 @@ public class Group {
         if (o == null || getClass() != o.getClass()) return false;
         Group group = (Group) o;
         return groupId == group.groupId &&
-                Objects.equals(groupName, group.groupName);
+                Objects.equals(groupName, group.groupName) &&
+                Objects.equals(groupHeader, group.groupHeader) &&
+                Objects.equals(groupFooter, group.groupFooter);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(groupName, groupId);
+        return Objects.hash(groupName, groupHeader, groupFooter, groupId);
     }
 
     @Override

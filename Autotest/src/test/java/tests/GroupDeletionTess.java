@@ -26,10 +26,9 @@ public class GroupDeletionTess extends TestBase {
         loginPage = navigation.openLoginPage();
         loginPage.login("admin", "secret");
         groupsPage = navigation.openGroupsPage();
-        if (groupsPage.countGroups() == 0) {
-            Group groupZero = generateRandomGroup();
+        if (dbHelper.getGroupsList().size() == 0) {
             addGroupPage = groupsPage.pressAddNewGroupBtn();
-            addGroupPage.fillGroupCreationFields(groupZero);
+            addGroupPage.fillGroupCreationFields(generateRandomGroup());
             successPage = addGroupPage.pressEnterInformationBtn();
             successPage.clickOnReturnLink();
         }
@@ -37,11 +36,11 @@ public class GroupDeletionTess extends TestBase {
 
     @Test(description = "Тест, который удаляет случайно выбранную группу")
     public void testGroupDeletion(){
-        Set<Group> groupsBefore = groupsPage.getGroupsSet();
+        Set<Group> groupsBefore = dbHelper.getGroupSet();
         Group deletedGroup = groupsBefore.iterator().next();
         groupsPage.deleteGroup(deletedGroup);
         navigation.openGroupsPage();
-        Set<Group> groupAfter = groupsPage.getGroupsSet();
+        Set<Group> groupAfter = dbHelper.getGroupSet();
         CompareTwoIntValue(groupsBefore.size(), groupAfter.size() + 1,
                 "Количество групп после должно быть на одну меньше, чем количество групп до");
         groupsBefore.remove(deletedGroup);

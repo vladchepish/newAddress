@@ -1,5 +1,6 @@
 package tests;
 
+import helpers.DbHelper;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -19,9 +20,11 @@ public class TestBase {
     protected static WebDriver driver;
     protected static WebDriverWait wait;
     protected static Navigation navigation;
+    protected static DbHelper dbHelper;
 
     @BeforeSuite
     public static void beforeClass() {
+        dbHelper = new DbHelper();
         String browser = BrowserType.CHROME;
         if (browser.equals(BrowserType.CHROME)) {
             driver = new ChromeDriver();

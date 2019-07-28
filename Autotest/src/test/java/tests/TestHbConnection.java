@@ -7,6 +7,7 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -29,6 +30,7 @@ public class TestHbConnection {
         }
     }
 
+    @Ignore
     @Test
     public void test(){
         Session session = sessionFactory.openSession();

@@ -56,13 +56,13 @@ public class GroupCreationTests extends TestBase {
 
     @Test(description = "Тест, который создаёт новую группу")
     public void testGroupCreationUsingSet() {
-        Set<Group> groupsBefore = groupsPage.getGroupsSet();
+        Set<Group> groupsBefore = dbHelper.getGroupSet();
         Group group = generateRandomGroup();
         addGroupPage = groupsPage.pressAddNewGroupBtn();
         addGroupPage.fillGroupCreationFields(group);
         successPage = addGroupPage.pressEnterInformationBtn();
         successPage.clickOnReturnLink();
-        Set<Group> groupAfter = groupsPage.getGroupsSet();
+        Set<Group> groupAfter = dbHelper.getGroupSet();
         CompareTwoIntValue(groupsBefore.size() + 1, groupAfter.size(),
                 "Количество групп до должно быть на одну меньше, чем количество групп после");
 
